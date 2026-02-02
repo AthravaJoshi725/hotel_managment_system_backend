@@ -1,8 +1,7 @@
 package com.example.demo.dto;
 
 public class LoginRequest {
-    // Login request will take email and password 
-
+    // Login request will take email and password
     private String email;
     private String password;
     

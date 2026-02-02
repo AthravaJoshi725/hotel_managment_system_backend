@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.dto.RegisterRequest;
+import com.example.demo.enums.UserRole;
 import com.example.demo.service.UserService;
 import com.example.demo.model.User;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -23,12 +23,36 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-        
-        User user = userService.registerUser(request);
+    @PostMapping("/register/customer")
+    public ResponseEntity<?> registerCustomer(@RequestBody RegisterRequest request) {
 
-        if(user==null){
+        User user = userService.registerUser(request, UserRole.CUSTOMER);
+
+        if(user == null){
+            return ResponseEntity.status(409).body("Email already registered");
+        }
+
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/register/staff")
+    public ResponseEntity<?> registerStaff(@RequestBody RegisterRequest request) {
+
+        User user = userService.registerUser(request, UserRole.STAFF);
+
+        if(user == null){
+            return ResponseEntity.status(409).body("Email already registered");
+        }
+
+        return ResponseEntity.ok(user);
+    }
+
+    @PostMapping("/register/admin")
+    public ResponseEntity<?> registerAdmin(@RequestBody RegisterRequest request) {
+
+        User user = userService.registerUser(request, UserRole.ADMIN);
+
+        if(user == null){
             return ResponseEntity.status(409).body("Email already registered");
         }
 
@@ -37,13 +61,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        
+
         User user = userService.loginUser(request);
 
-        if(user==null){
-            return ResponseEntity.status(401).body("Invalid email or password");
+        if(user == null){
+            return ResponseEntity.status(401).body("Invalid credentials or account inactive");
         }
 
         return ResponseEntity.ok(user);
     }
+
 }

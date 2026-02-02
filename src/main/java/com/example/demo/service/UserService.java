@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.dto.RegisterRequest;
 import com.example.demo.dto.LoginRequest;
+import com.example.demo.enums.AccountStatus;
+import com.example.demo.enums.UserRole;
 import com.example.demo.model.User;
 import com.example.demo.util.JsonFileUtil;
 
@@ -14,20 +16,17 @@ import java.time.LocalDateTime;
 
 @Service
 public class UserService {
-    
-    public User registerUser(RegisterRequest request){
+    public User registerUser(RegisterRequest request, UserRole role){
 
-        // Read existing users from json
         List<User> users = JsonFileUtil.readUsers();
 
-        // Check for duplicate email
-        for(User existingUser: users){
+
+        for(User existingUser : users){
             if(existingUser.getEmail().equals(request.getEmail())){
                 return null;
             }
         }
 
-        // Craete new User class before storing
         User user = new User();
         user.setId(UUID.randomUUID().toString());
         user.setCustomerName(request.getCustomerName());
@@ -36,35 +35,40 @@ public class UserService {
         user.setPhoneNumber(request.getPhoneNumber());
         user.setCreatedAt(LocalDateTime.now());
 
-        
-        // add the new User to Json
-        users.add(user);
 
-        // update json with new list
+        user.setRole(role);
+        user.setStatus(AccountStatus.ACTIVE);
+
+        users.add(user);
         JsonFileUtil.writeUsers(users);
 
         return user;
     }
 
+
     public User loginUser(LoginRequest request){
-        
+
         List<User> users = JsonFileUtil.readUsers();
 
-        String loginMail = request.getEmail();
-        String loginPassword = request.getPassword();
+        for(User user : users){
 
-        for(User user: users){
+            if(user.getEmail().equals(request.getEmail())){
 
-            if(user.getEmail().equals(loginMail)){
-
-                if(user.getPassword().equals(loginPassword)){
-                    return user;
-                }
-                else{
+                // 1. Check password
+                if(!user.getPassword().equals(request.getPassword())){
                     return null;
                 }
+
+                // 2. Check account status
+                if(user.getStatus() != AccountStatus.ACTIVE){
+                    return null;
+                }
+
+                // 3. Successful login
+                return user;
             }
         }
         return null;
     }
+
 }

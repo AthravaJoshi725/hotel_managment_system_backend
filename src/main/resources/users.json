@@ -1,15 +1,28 @@
 [ {
-  "id" : "f41854da-999f-4a2f-924d-3a7173215fa8",
-  "customerName" : "Atharva Joshi",
-  "email" : "atharva@gmail.com",
-  "password" : "1234",
-  "phoneNumber" : "9999999999",
-  "createdAt" : "2026-02-01T17:22:37.0463969"
-}, {
-  "id" : "719d5ae2-c62c-467c-9ca9-0ffe56f66d40",
-  "customerName" : "Atha i",
-  "email" : "joshi@gmail.com",
+  "id" : "f73b8dd1-6a0c-4fb9-a47c-5ac7c11f7068",
+  "customerName" : "Heramb",
+  "email" : "joshi1@gmail.com",
   "password" : "1255534",
-  "phoneNumber" : "9999999",
-  "createdAt" : "2026-02-01T17:23:54.6192215"
+  "phoneNumber" : "999992299",
+  "createdAt" : "2026-02-02T21:47:38.2728977",
+  "role" : "CUSTOMER",
+  "status" : "ACTIVE"
+}, {
+  "id" : "efa58beb-5ad6-4ae7-8542-12acc762e7a9",
+  "customerName" : "Heramb",
+  "email" : "josh21@gmail.com",
+  "password" : "1255534",
+  "phoneNumber" : "999992299",
+  "createdAt" : "2026-02-02T21:49:13.853683",
+  "role" : "STAFF",
+  "status" : "ACTIVE"
+}, {
+  "id" : "5c5f9ba0-9d5e-49d1-bae8-9af30ee1ff7a",
+  "customerName" : "Heramb",
+  "email" : "j2sh21@gmail.com",
+  "password" : "1255534",
+  "phoneNumber" : "999992299",
+  "createdAt" : "2026-02-02T21:50:06.0794081",
+  "role" : "ADMIN",
+  "status" : "ACTIVE"
 } ]
