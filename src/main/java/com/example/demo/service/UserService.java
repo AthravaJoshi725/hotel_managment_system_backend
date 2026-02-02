@@ -30,7 +30,7 @@ public class UserService {
         // Craete new User class before storing
         User user = new User();
         user.setId(UUID.randomUUID().toString());
-        user.setCustomerName(request.getCustomerName());
+        user.setUserName(request.getUserName());
         user.setEmail(request.getEmail());
         user.setPassword(request.getPassword());
         user.setPhoneNumber(request.getPhoneNumber());
