@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class User {
     private String id;
-    private String customerName;
+    private String userName;
     private String email;
     private String password;
     private String phoneNumber;

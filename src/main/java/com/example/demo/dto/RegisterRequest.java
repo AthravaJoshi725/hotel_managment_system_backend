@@ -1,16 +1,16 @@
 package com.example.demo.dto;
 
 public class RegisterRequest {
-    private String customerName;
+    private String userName;
     private String email;
     private String password;
     private String phoneNumber;
     
-    public String getCustomerName() {
-        return customerName;
+    public String getUserName() {
+        return userName;
     }
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     public String getEmail() {
         return email;
